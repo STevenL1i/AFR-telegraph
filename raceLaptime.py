@@ -1,3 +1,6 @@
+### user import race lap time data until it user cancelled
+
+
 import csv
 import tkinter
 from tkinter import filedialog
@@ -68,4 +71,4 @@ ax.legend(frameon=False)
 
 # plt.show()
 
-plt.savefig("laptime.png", format="png")
+plt.savefig("laptimedata/laptime.png", format="png")
