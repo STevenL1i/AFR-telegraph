@@ -1,4 +1,4 @@
-### user import race lap time data until it user cancelled
+### user import race lap time data until user cancelled
 
 
 import csv
