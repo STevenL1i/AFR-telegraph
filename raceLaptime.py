@@ -27,9 +27,6 @@ fig, ax = plt.subplots(figsize=(12,8))
 ax.xaxis.set_major_locator(plt.MultipleLocator(1))
 ax.yaxis.set_major_locator(plt.MultipleLocator(1))
 
-ax.xaxis.set_major_locator(plt.MultipleLocator(1))
-ax.yaxis.set_major_locator(plt.MultipleLocator(1))
-
 def lap1_rank_and_name(value, tick_number):
     mins = int(int(value)/60)
     second = int(value) - 60*int(mins)
