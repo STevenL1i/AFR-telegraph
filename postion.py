@@ -64,7 +64,7 @@ for file in filelist:
 
 fig, ax = plt.subplots(figsize=(24,12))
 
-plt.xlim(1,racelength)
+plt.xlim(0,racelength)
 plt.ylim(21,0)
 
 ax.xaxis.set_major_locator(plt.MultipleLocator(1))
@@ -92,10 +92,18 @@ for file in filelist:
     with open(f'laptimedata/{file}', "r") as laps:
         reader = csv.DictReader(laps)
 
+        startindex = 0
         for row in reader:
             name = row.get("driverName")
-            lap.append(int(row.get("LapNum")))
+            if startindex == 0:
+                lap.append(0)
+                startindex = 1
+            else:
+                lap.append(int(row.get("LapNum")))
+            
             pos.append(int(row.get("Position")))
+
+
 
     rank_lap1[pos[0]-1] = name
     rank_final[pos[-1]-1] = name
