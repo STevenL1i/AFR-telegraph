@@ -23,7 +23,7 @@ while True:
     print(f'laptime file {filepath} imported')
 
 
-fig, ax = plt.subplots(figsize=(48,32))
+fig, ax = plt.subplots(figsize=(64,16))
 
 plt.ylim(0,1.05)
 
@@ -32,8 +32,8 @@ ax.yaxis.set_major_locator(plt.MultipleLocator(0.1))
 
 ax.tick_params(axis="x", bottom=True, top=True, labelbottom=True, labeltop=False, pad = 2)
 
-ax.set_title("Time", loc="left")
-ax.set_xlabel("Time line")
+ax.set_title("Distance", loc="left")
+ax.set_xlabel("Lap Distance")
 ax.set_ylabel("throttle")
 
 for filepath in telefile:
@@ -41,14 +41,17 @@ for filepath in telefile:
     with open(filepath, "r") as tele:
         reader = csv.DictReader(tele)
 
-        time = []
+        LapDistance = []
         throttle = []
         for row in reader:
+            if row.get("name") == "":
+                continue
             name = row.get("name")
-            time.append(row.get("frame"))
-            throttle.append(float(f'{row.get("throttle"):.4}'))
+            distance = float(f'{(float(row.get("LapDistance"))):.4f}')
+            LapDistance.append(distance)
+            throttle.append(float(f'{float(row.get("throttle")):.4f}'))
 
-        ax.plot(time, throttle, label=(f'{name}'), linewidth=2)
+        ax.plot(LapDistance, throttle, label=(f'{name}'), linewidth=2)
 
 
 plt.grid(True)
@@ -61,17 +64,17 @@ plt.savefig("telemetrydata/telemetry(power).png", format="png")
 
 
 
-fig2, ax2 = plt.subplots(figsize=(48,32))
+fig2, ax2 = plt.subplots(figsize=(64,16))
 
 plt.ylim(0,1.05)
 
 ax2.xaxis.set_major_locator(plt.MultipleLocator(100))
 ax2.yaxis.set_major_locator(plt.MultipleLocator(0.1))
 
-ax2.tick_params(axis="x", bottom=True, top=True, labelbottom=True, labeltop=False, pad = 2)
+ax2.tick_params(axis="x", bottom=True, top=True, labelbottom=True, labeltop=False, pad=2)
 
-ax2.set_title("Time", loc="left")
-ax2.set_xlabel("Time line")
+ax2.set_title("Distance", loc="left")
+ax2.set_xlabel("Lap Distance")
 ax2.set_ylabel("brake")
 
 for filepath in telefile:
@@ -79,14 +82,17 @@ for filepath in telefile:
     with open(filepath, "r") as tele:
         reader = csv.DictReader(tele)
 
-        time = []
+        LapDistance = []
         brake = []
         for row in reader:
+            if row.get("name") == "":
+                continue
             name = row.get("name")
-            time.append(row.get("frame"))
-            brake.append(float(f'{row.get("brake"):.4}'))
+            distance = float(f'{float(row.get("LapDistance")):.4f}')
+            LapDistance.append(distance)
+            brake.append(float(f'{float(row.get("brake")):.4f}'))
 
-        ax2.plot(time, brake, label=(f'{name}'), linewidth=2)
+        ax2.plot(LapDistance, brake, label=(f'{name}'), linewidth=2)
 
 
 plt.grid(True)
