@@ -65,7 +65,7 @@ for file in filelist:
 fig, ax = plt.subplots(figsize=(24,12))
 
 plt.xlim(0,racelength)
-plt.ylim(21,0)
+plt.ylim(len(filelist)+1,0)
 
 ax.xaxis.set_major_locator(plt.MultipleLocator(1))
 ax.yaxis.set_major_locator(plt.MultipleLocator(1))
@@ -75,7 +75,7 @@ ax.yaxis.set_major_formatter(plt.FuncFormatter(lap1_rank_and_name))
 ax.tick_params(axis="x", bottom=True, top=True, labelbottom=True, labeltop=True, pad = 2)
 
 ax_2 = ax.twinx()
-ax_2.set_ylim(21, 0)
+ax_2.set_ylim(len(filelist)+1, 0)
 ax_2.yaxis.set_major_locator(plt.MultipleLocator(1))
 ax_2.yaxis.set_major_formatter(plt.FuncFormatter(final_rank_and_name))
 
