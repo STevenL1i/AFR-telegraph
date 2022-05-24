@@ -144,3 +144,83 @@ plt.grid(True)
 ax3.legend(frameon=True)
 
 plt.savefig("telemetrydata/telemetry(gear).png", format="png")
+
+
+
+############## steer plot ###############
+fig4, ax4 = plt.subplots(figsize=(64,16))
+
+plt.ylim(-1,1)
+
+ax4.xaxis.set_major_locator(plt.MultipleLocator(100))
+ax4.yaxis.set_major_locator(plt.MultipleLocator(0.1))
+
+ax4.tick_params(axis="x", bottom=True, top=True, labelbottom=True, labeltop=False, pad=2)
+
+ax4.set_title("Distance", loc="left")
+ax4.set_xlabel("Lap Distance")
+ax4.set_ylabel("steer")
+
+for filepath in telefile:
+    name = ""
+    with open(filepath, "r") as tele:
+        reader = csv.DictReader(tele)
+
+        LapDistance = []
+        steer = []
+        for row in reader:
+            if row.get("name") == "":
+                continue
+            name = row.get("name")
+            distance = float(f'{float(row.get("LapDistance")):.4f}')
+            LapDistance.append(distance)
+            s = float(f'{float(row.get("steer")):.4f}')
+            steer.append(s)
+
+        ax4.plot(LapDistance, steer, label=(f'{name}'), linewidth=2)
+
+
+plt.grid(True)
+ax4.legend(frameon=True)
+
+plt.savefig("telemetrydata/telemetry(steer).png", format="png")
+
+
+
+############## speed plot ###############
+fig5, ax5 = plt.subplots(figsize=(64,16))
+
+plt.ylim(0, 360)
+
+ax5.xaxis.set_major_locator(plt.MultipleLocator(100))
+ax5.yaxis.set_major_locator(plt.MultipleLocator(10))
+
+ax5.tick_params(axis="x", bottom=True, top=True, labelbottom=True, labeltop=False, pad=2)
+
+ax5.set_title("Distance", loc="left")
+ax5.set_xlabel("Lap Distance")
+ax5.set_ylabel("speed")
+
+for filepath in telefile:
+    name = ""
+    with open(filepath, "r") as tele:
+        reader = csv.DictReader(tele)
+
+        LapDistance = []
+        speed = []
+        for row in reader:
+            if row.get("name") == "":
+                continue
+            name = row.get("name")
+            distance = float(f'{float(row.get("LapDistance")):.4f}')
+            LapDistance.append(distance)
+            s = float(f'{float(row.get("speed")):.4f}')
+            speed.append(s)
+
+        ax5.plot(LapDistance, speed, label=(f'{name}'), linewidth=2)
+
+
+plt.grid(True)
+ax5.legend(frameon=True)
+
+plt.savefig("telemetrydata/telemetry(speed).png", format="png")
